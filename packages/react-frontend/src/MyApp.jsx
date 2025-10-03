@@ -46,7 +46,10 @@ function MyApp() {
         if (res.status != 201) {
           throw new Error();
         }
-        return setCharacters([...characters, person]);
+        return res.json();
+      })
+      .then((json) => {
+        return setCharacters([...characters, json]);
       })
       .catch((error) => {
         console.log(error);
