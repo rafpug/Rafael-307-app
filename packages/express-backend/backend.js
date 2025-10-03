@@ -60,6 +60,7 @@ const addUser = (user) => {
 
 const deleteUserById = (id) => {
   const user = findUserById(id);
+  console.log(user);
   if (user != undefined) {
     users["users_list"].splice(
       users["users_list"].indexOf(findUserById(id)),
@@ -97,7 +98,7 @@ app.get("/users/:id", (req, res) => {
 
 app.post("/users", (req, res) => {
   const userToAdd = req.body;
-  userToAdd.id = Math.random();
+  userToAdd.id = String(Math.floor(Math.random() * 100000));
   addUser(userToAdd);
   res.status(201).send(userToAdd);
 });
