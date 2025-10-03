@@ -65,6 +65,8 @@ const deleteUserById = (id) => {
       users["users_list"].indexOf(findUserById(id)),
       1
     );
+  } else {
+    return undefined;
   }
   return id;
 };
@@ -102,8 +104,10 @@ app.post("/users", (req, res) => {
 
 app.delete("/users/:id", (req, res) => {
   const id = req.params["id"];
-  deleteUserById(id);
-  res.send();
+  if (deleteUserById(id) == undefined) {
+    res.status(404).send();
+  }
+  res.status(204).send();
 });
 
 app.listen(port, () => {

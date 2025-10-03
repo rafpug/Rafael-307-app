@@ -34,10 +34,21 @@ function MyApp() {
   }
 
   function removeOneCharacter(index) {
-    const updated = characters.filter((character, i) => {
-      return i !== index;
+    const trash = characters.at(index);
+    const promise = fetch(`Http://localhost:8000/users/${trash.id}`, {
+      method: `DELETE`,
     });
-    setCharacters(updated);
+
+    promise
+      .then((res) => {
+        if (res.status == 204) {
+          const updated = characters.filter((character, i) => {
+            return i !== index;
+          });
+          setCharacters(updated);
+        }
+      })
+      .catch((error) => console.log(error));
   }
 
   function updateList(person) {
