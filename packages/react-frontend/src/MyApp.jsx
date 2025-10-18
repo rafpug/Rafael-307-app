@@ -35,7 +35,7 @@ function MyApp() {
 
   function removeOneCharacter(index) {
     const trash = characters.at(index);
-    const promise = fetch(`Http://localhost:8000/users/${trash.id}`, {
+    const promise = fetch(`Http://localhost:8000/users/${trash._id}`, {
       method: `DELETE`,
     });
 
